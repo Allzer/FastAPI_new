@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import uvicorn
 
+from sqlalchemy import select
 from database import SessionDep
 from src.models.models_main_page.model import BookModel
 
@@ -27,8 +28,11 @@ async def add_book(data: BookSchema, session : SessionDep):
     return {'ok': True}
 
 @app.get('/book')
-async def get_book():
-    pass
+async def get_book(session : SessionDep):
+    query = select(BookModel)
+    result = await session.execute(query)
+    print(result.all())
+    return result.scalars().all()
 
 if __name__ == '__main__':
     uvicorn.run('main:app', reload=True)
