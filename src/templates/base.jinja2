@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% block page_css %}
+    {% endblock %}
+    <title>{% block title %}Заголовок по умолчанию{% endblock %}</title>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {% block head_resources %}
+    {% endblock %}
+</head>
+<body>
+    
+    <main>
+        {% block content %}
+        <h1>Основной контент</h1>
+        {% endblock %}
+    </main>
+
+    {# Подвал страницы #}
+    <footer>
+        {% block footer %}
+        <p>&copy; Компания {{ current_year }}</p>
+        {% endblock %}
+    </footer>
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

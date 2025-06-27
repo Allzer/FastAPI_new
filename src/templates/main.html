@@ -1,0 +1,78 @@
+{% extends "base.jinja2" %}
+
+{% block page_css %}
+    <link rel="stylesheet" href="/src/static/css/main.css">
+{% endblock %}
+
+{% block title %}Книжная полка | Главная{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+    <!-- Герой-секция -->
+    <section class="hero-section text-center">
+        <h1 class="display-4 fw-bold">Добро пожаловать в мир книг!</h1>
+        <p class="lead text-muted">Откройте для себя новые истории, авторов и жанры в нашей коллекции</p>
+        
+        <form class="search-form mt-4 d-flex">
+            <input class="form-control form-control-lg" 
+                   type="search" 
+                   placeholder="Найти книгу, автора, жанр..."
+                   aria-label="Search">
+            <button class="btn btn-primary btn-lg search-btn" type="submit">
+                <i class="bi bi-search"></i> Поиск
+            </button>
+        </form>
+    </section>
+
+    <!-- Новые поступления -->
+    <section class="mb-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="section-header">Новые поступления</h2>
+            <a href="/books" class="btn btn-book">
+                Все книги <i class="bi bi-arrow-right"></i>
+            </a>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            {% for book in new_books %}
+            <div class="col book-col">
+                <div class="card h-100 book-card">
+                    <div class="img-container">
+                        <img src="{{ book.cover_url or 'https://via.placeholder.com/200x300?text=Обложка+книги' }}" 
+                             class="book-cover" 
+                             alt="Обложка книги {{ book.title }}">
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title book-title">{{ book.title }}</h5>
+                        <p class="card-text book-author">{{ book.author }}</p>
+                        <div class="book-meta">
+                            <span class="badge badge-rating">
+                                <i class="bi bi-star-fill"></i> {{ book.rating|default(4.2) }}
+                            </span>
+                            <span>{{ book.year|default(2023) }}</span>
+                        </div>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <a href="/book/{{ book.id }}" class="btn btn-outline-primary w-100">
+                            Подробнее
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Популярные жанры -->
+    <section class="mb-5">
+        <h2 class="section-header">Популярные жанры</h2>
+        <div class="d-flex flex-wrap gap-2">
+            {% for genre in genres %}
+            <a href="/books?genre={{ genre.id }}" class="btn btn-outline-secondary">
+                {{ genre.name }} <span class="badge bg-primary rounded-pill">{{ genre.count }}</span>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}
