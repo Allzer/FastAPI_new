@@ -1,0 +1,25 @@
+{% extends "base.jinja2" %}
+
+{% block content %}
+{% block title %}{{ title }}{% endblock %}
+<section class="hero">
+    <h2>Добро пожаловать в мир литературы!</h2>
+    <p>Откройте для себя тысячи книг различных жанров</p>
+    <a href="/books" class="btn">Перейти к книгам</a>
+</section>
+
+<section class="features">
+    <div class="feature">
+        <h3>Новые поступления</h3>
+        <p>Самые свежие книги в нашей коллекции</p>
+    </div>
+    <div class="feature">
+        <h3>Популярные авторы</h3>
+        <p>Лучшие произведения известных писателей</p>
+    </div>
+    <div class="feature">
+        <h3>Подборки</h3>
+        <p>Книжные коллекции по темам и жанрам</p>
+    </div>
+</section>
+{% endblock %}

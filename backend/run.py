@@ -8,7 +8,7 @@ from config import SECRET
 from database import SessionDep
 from src.models.models_main_page.model import BookModel
 
-from src.main_page.main_page import router as main_page_router
+from src.main_page.routers.main_page import router as main_page_router
 
 
 from authx import AuthX, AuthXConfig
